@@ -65,10 +65,10 @@ form.addEventListener("submit", async (event) =>{
               hideLoadMoreButton();
               showMessage("info", 
                 "We're sorry, but you've reached the end of search results.")
+                createGallery(data.hits);
             }else{
-            
             createGallery(data.hits);
-            const img = document.querySelector(".gallery-item")
+            const img = document.querySelector(".gallery-item");
             if(img){
                const rect = img.getBoundingClientRect();
             window.scrollBy({
