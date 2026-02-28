@@ -39,8 +39,12 @@ form.addEventListener("submit", async (event) =>{
                   showMessage("info", 
                 "We're sorry, but you've reached the end of search results.")
             }else{
+
               createGallery(data.hits);
-                showLoadMoreButton();  
+                showLoadMoreButton();
+            if(totalPages === 1){
+              hideLoadMoreButton();
+            }  
             }
         }
       }catch (error) {
