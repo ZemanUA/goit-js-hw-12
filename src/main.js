@@ -66,6 +66,10 @@ form.addEventListener("submit", async (event) =>{
               showMessage("info", 
                 "We're sorry, but you've reached the end of search results.")
                 createGallery(data.hits);
+                window.scrollBy({
+              top: rect.height * 2,
+              behavior: "smooth"
+            });
             }else{
             createGallery(data.hits);
             const img = document.querySelector(".gallery-item");
