@@ -1,14 +1,12 @@
+import { getImagesByQuery, perPage } from "./js/pixabay-api";
+import { showLoader, hideLoader, showLoadMoreButton, 
+  hideLoadMoreButton, clearGallery, createGallery, showMessage } from "./js/render-functions";
 
 const form = document.querySelector(".form");
 const input = document.querySelector('[name="search-text"]');
 const bntLoad = document.querySelector(".showLoad");
 
 // Import first function
-
-import { getImagesByQuery, perPage } from "./js/pixabay-api";
-import { showLoader, hideLoader, showLoadMoreButton, 
-  hideLoadMoreButton, clearGallery, createGallery, showMessage } from "./js/render-functions";
-
 
 
 let search = "";
@@ -44,6 +42,8 @@ form.addEventListener("submit", async (event) =>{
                 showLoadMoreButton();
             if(totalPages === 1){
               hideLoadMoreButton();
+              showMessage("info", 
+                "We're sorry, but you've reached the end of search results.")
             }  
             }
         }
@@ -61,7 +61,7 @@ form.addEventListener("submit", async (event) =>{
             try{
               const data = await getImagesByQuery(search,page);
               const totalPages = Math.ceil(data.totalHits / perPage); 
-            if(page > totalPages){
+            if(page > totalPages || page === totalPages){
               hideLoadMoreButton();
               showMessage("info", 
                 "We're sorry, but you've reached the end of search results.")
