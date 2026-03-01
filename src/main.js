@@ -61,6 +61,8 @@ form.addEventListener("submit", async (event) =>{
             try{
               const data = await getImagesByQuery(search,page);
               const totalPages = Math.ceil(data.totalHits / perPage); 
+              const img = document.querySelector(".gallery-item");
+              const rect = img.getBoundingClientRect();
             if(page > totalPages || page === totalPages){
               hideLoadMoreButton();
               showMessage("info", 
@@ -72,9 +74,7 @@ form.addEventListener("submit", async (event) =>{
             });
             }else{
             createGallery(data.hits);
-            const img = document.querySelector(".gallery-item");
             if(img){
-               const rect = img.getBoundingClientRect();
             window.scrollBy({
               top: rect.height * 2,
               behavior: "smooth"
